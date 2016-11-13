@@ -14,21 +14,18 @@ public class CharacterCustomization extends ApplicationAdapter implements InputP
 	TextureRegion currentFrame;
 	CharacterAnimation animation;
 
-	float stateTime;
-
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		animation = new CharacterAnimation("tanned.png");
 		animation.ChooseAnimation(SpritesheetValues.SHOOT_FRONT);
-		stateTime = 0f;
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		stateTime += Gdx.graphics.getDeltaTime();
-		currentFrame = animation.getSpriteAnimation().getKeyFrame(stateTime, true);
+		animation.setStateTime(animation.getStateTime() + Gdx.graphics.getDeltaTime());
+		currentFrame = animation.getSpriteAnimation().getKeyFrame(animation.getStateTime(), true);
 		batch.begin();
 		batch.draw(currentFrame, 50, 50);
 
