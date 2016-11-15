@@ -4,7 +4,6 @@ package com.evergreen.titz;
  * Created by apollo on 11/12/2016.
  */
 public enum SpritesheetValues {
-    SPRITESHEET(13, 21),
     WALK_BACK(8, 1, 8),
     WALK_LEFT(9, 1, 8),
     WALK_FRONT(10, 1, 8),
@@ -14,13 +13,7 @@ public enum SpritesheetValues {
     SHOOT_FRONT(18, 1, 12),
     SHOOT_RIGHT(19, 1, 12),;
 
-    public int WIDTH, HEIGHT;
     public int ROW, START_COL, END_COL;
-
-    SpritesheetValues(int pWidth, int pHeight) {
-        this.WIDTH = pWidth;
-        this.HEIGHT = pHeight;
-    }
 
     SpritesheetValues(int pRow, int pStartCol, int pEncCol) {
         this.ROW = pRow;
