@@ -13,6 +13,9 @@ import com.badlogic.gdx.utils.Disposable;
  */
 public class CharacterAnimation implements Disposable {
 
+    private static final int SPRITESHEET_HEIGHT = 21;
+    private static final int SPRITESHEET_WIDTH = 13;
+
     private static final float ANIMATION_SPEED = 0.15f;
 
     public Animation getSpriteAnimation() {
@@ -40,8 +43,8 @@ public class CharacterAnimation implements Disposable {
     public CharacterAnimation(String pSpriteSheetPath) {
         spriteSheet = new Texture(Gdx.files.internal(pSpriteSheetPath));
         splitSheet = TextureRegion.split(spriteSheet,
-                                                    spriteSheet.getWidth()/SpritesheetValues.SPRITESHEET.WIDTH,
-                                                    spriteSheet.getHeight()/SpritesheetValues.SPRITESHEET.HEIGHT);
+                                                    spriteSheet.getWidth()/SPRITESHEET_WIDTH,
+                                                    spriteSheet.getHeight()/SPRITESHEET_HEIGHT);
 
         stateTime = 0f;
     }
