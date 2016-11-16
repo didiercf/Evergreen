@@ -11,7 +11,7 @@ public class CharacterCustomization extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 
-		this.setScreen(new CharacterPicker(this));
+		this.setScreen(new MainMenu(this));
 	}
 
 	@Override
@@ -21,6 +21,8 @@ public class CharacterCustomization extends Game {
 
 	@Override
 	public void dispose () {
+		super.dispose();
+
 		batch.dispose();
 	}
 }

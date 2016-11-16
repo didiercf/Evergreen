@@ -44,7 +44,7 @@ public class CharacterAnimation implements Disposable {
         spriteSheet = new Texture(Gdx.files.internal(pSpriteSheetPath));
         splitSheet = TextureRegion.split(spriteSheet,
                                                     spriteSheet.getWidth()/SPRITESHEET_WIDTH,
-                                                    spriteSheet.getHeight()/SPRITESHEET_HEIGHT);
+                                                    spriteSheet.getHeight()/SPRITESHEET_HEIGHT );
 
         stateTime = 0f;
     }
