@@ -25,14 +25,23 @@ public class MainMenu implements Screen {
         stage = new Stage();
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         table = new Table(skin);
-        table.setFillParent(true);
+        //table.setFillParent(true);
     }
 
     @Override
     public void show() {
-        TextButton button1 = new TextButton("click me", skin);
+        Label nameLabel = new Label("Name:", skin);
+        TextField nameText = new TextField("", skin);
+        Label addressLabel = new Label("Address:", skin);
+        TextField addressText = new TextField("", skin);
 
-        table.add(button1);
+        table.add(nameLabel).expandX();
+        table.add(nameText).width(100);
+        table.row();
+        table.add(addressLabel);
+        table.add(addressText).width(100);
+
+        table.setDebug(true);
 
         stage.addActor(table);
     }
