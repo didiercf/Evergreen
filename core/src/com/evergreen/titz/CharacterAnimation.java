@@ -49,7 +49,7 @@ public class CharacterAnimation implements Disposable {
         stateTime = 0f;
     }
 
-    public void ChooseAnimation(SpritesheetValues animationValues) {
+    public void chooseAnimation(SpritesheetValues animationValues) {
         animationFrames = new TextureRegion[animationValues.END_COL];
 
         int index = 0;

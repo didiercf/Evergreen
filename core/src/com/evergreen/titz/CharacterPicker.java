@@ -24,7 +24,7 @@ public class CharacterPicker implements Screen {
 
     @Override
     public void show() {
-        animation.ChooseAnimation(SpritesheetValues.WALK_FRONT);
+        animation.chooseAnimation(SpritesheetValues.WALK_FRONT);
     }
 
     @Override
@@ -38,19 +38,19 @@ public class CharacterPicker implements Screen {
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            animation.ChooseAnimation(SpritesheetValues.WALK_BACK);
+            animation.chooseAnimation(SpritesheetValues.WALK_BACK);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            animation.ChooseAnimation(SpritesheetValues.WALK_RIGHT);
+            animation.chooseAnimation(SpritesheetValues.WALK_RIGHT);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            animation.ChooseAnimation(SpritesheetValues.WALK_LEFT);
+            animation.chooseAnimation(SpritesheetValues.WALK_LEFT);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            animation.ChooseAnimation(SpritesheetValues.WALK_FRONT);
+            animation.chooseAnimation(SpritesheetValues.WALK_FRONT);
         }
 
         game.batch.end();

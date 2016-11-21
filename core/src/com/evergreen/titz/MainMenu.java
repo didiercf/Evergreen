@@ -17,7 +17,6 @@ public class MainMenu implements Screen {
     private Stage stage;
     private Skin skin;
     private Table table;
-    private Button button;
 
     public MainMenu(final CharacterCustomization game) {
         this.game = game;
@@ -25,7 +24,8 @@ public class MainMenu implements Screen {
         stage = new Stage();
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         table = new Table(skin);
-        //table.setFillParent(true);
+
+
     }
 
     @Override
@@ -41,6 +41,7 @@ public class MainMenu implements Screen {
         table.add(addressLabel);
         table.add(addressText).width(100);
 
+        table.setPosition(200, 200);
         table.setDebug(true);
 
         stage.addActor(table);
