@@ -1,8 +1,10 @@
 package com.evergreen.titz;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,6 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * Created by 1458214 on 2016-11-15.
  */
 public class MainMenu implements Screen {
+
+    final String[] chestWears = { "Chainmail", "Leather Jacket", "Winter Coat", "Naked" };
+
+    int indexChestWear = 0;
 
     final CharacterCustomization game;
 
@@ -32,6 +38,8 @@ public class MainMenu implements Screen {
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(stage);
+
         Label placeholder = new Label("", skin);
 
         Label headLabel = new Label("Head : ", skin);
@@ -39,10 +47,13 @@ public class MainMenu implements Screen {
         Label legsLabel = new Label("Legs : ", skin);
         Label feetLabel = new Label("Feet : ", skin);
 
-        TextField currentHeadPiece = new TextField("Hat", skin);
-        final TextField currentChestPiece = new TextField("Leather Jacket", skin);
-        TextField currentLegPiece = new TextField("Jeans", skin);
-        TextField currentFeetPiece = new TextField("Crocs", skin);
+        final TextField currentHeadPiece = new TextField("Hat", skin);
+        final TextField currentChestPiece = new TextField(chestWears[indexChestWear], skin);
+        final TextField currentLegPiece = new TextField("Jeans", skin);
+        final TextField currentFeetPiece = new TextField("Crocs", skin);
+
+        currentHeadPiece.setDisabled(true);
+        currentChestPiece.setDisabled(true);
 
         TextButton btnHeadLeft = new TextButton("<", skin);
         TextButton btnHeadRight = new TextButton(">", skin);
@@ -53,10 +64,15 @@ public class MainMenu implements Screen {
         TextButton btnFeetLeft = new TextButton("<", skin);
         TextButton btnFeetRight = new TextButton(">", skin);
 
-        btnChestLeft.addListener(new ClickListener() {
+        btnChestRight.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                currentChestPiece.setText("Booty");
+                if (indexChestWear < chestWears.length - 1)
+                    indexChestWear++;
+                else
+                    indexChestWear = 0;
+
+                currentChestPiece.setText(chestWears[indexChestWear]);
             }
         });
 
