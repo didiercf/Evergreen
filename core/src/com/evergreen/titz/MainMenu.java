@@ -3,9 +3,11 @@ package com.evergreen.titz;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
  * Created by 1458214 on 2016-11-15.
@@ -25,24 +27,82 @@ public class MainMenu implements Screen {
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         table = new Table(skin);
 
-
+        table.setFillParent(true);
     }
 
     @Override
     public void show() {
-        Label nameLabel = new Label("Name:", skin);
-        TextField nameText = new TextField("", skin);
-        Label addressLabel = new Label("Address:", skin);
-        TextField addressText = new TextField("", skin);
+        Label placeholder = new Label("", skin);
 
-        table.add(nameLabel).expandX();
-        table.add(nameText).width(100);
+        Label headLabel = new Label("Head : ", skin);
+        Label chestLabel = new Label("Chest : ", skin);
+        Label legsLabel = new Label("Legs : ", skin);
+        Label feetLabel = new Label("Feet : ", skin);
+
+        TextField currentHeadPiece = new TextField("Hat", skin);
+        final TextField currentChestPiece = new TextField("Leather Jacket", skin);
+        TextField currentLegPiece = new TextField("Jeans", skin);
+        TextField currentFeetPiece = new TextField("Crocs", skin);
+
+        TextButton btnHeadLeft = new TextButton("<", skin);
+        TextButton btnHeadRight = new TextButton(">", skin);
+        TextButton btnChestLeft = new TextButton("<", skin);
+        TextButton btnChestRight = new TextButton(">", skin);
+        TextButton btnLegLeft = new TextButton("<", skin);
+        TextButton btnLegRight = new TextButton(">", skin);
+        TextButton btnFeetLeft = new TextButton("<", skin);
+        TextButton btnFeetRight = new TextButton(">", skin);
+
+        btnChestLeft.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                currentChestPiece.setText("Booty");
+            }
+        });
+
+        //Head
+        table.add(placeholder);
+        table.add(headLabel);
+        table.add(placeholder);
         table.row();
-        table.add(addressLabel);
-        table.add(addressText).width(100);
+        table.add(btnHeadLeft);
+        table.add(currentHeadPiece);
+        table.add(btnHeadRight);
+        table.row();
 
-        table.setPosition(200, 200);
-        table.setDebug(true);
+        //Chest
+        table.add(placeholder);
+        table.add(chestLabel);
+        table.add(placeholder);
+        table.row();
+        table.add(btnChestLeft);
+        table.add(currentChestPiece);
+        table.add(btnChestRight);
+        table.row();
+
+        //Legs
+        table.add(placeholder);
+        table.add(legsLabel);
+        table.add(placeholder);
+        table.row();
+        table.add(btnLegLeft);
+        table.add(currentLegPiece);
+        table.add(btnLegRight);
+        table.row();
+
+        //Feet
+        table.add(placeholder);
+        table.add(feetLabel);
+        table.add(placeholder);
+        table.row();
+        table.add(btnFeetLeft);
+        table.add(currentFeetPiece);
+        table.add(btnFeetRight);
+
+        table.left();
+
+        table.pad(0, Gdx.graphics.getWidth() / 4 - (table.getMinWidth() / 2),  0, 0);
+        //table.setDebug(true);
 
         stage.addActor(table);
     }
