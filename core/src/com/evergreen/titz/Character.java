@@ -26,10 +26,10 @@ public class Character {
         else
             throw new IllegalArgumentException();
 
-        headWear = new Texture(Gdx.files.internal(headWearFileName));
-        chestWear = new Texture(Gdx.files.internal(chestWearFileName));
-        legWear = new Texture(Gdx.files.internal(legWearFileName));
-        feetWear = new Texture(Gdx.files.internal(feetWearFileName));
+        headWear = new Texture(Gdx.files.internal("head/" + headWearFileName));
+        chestWear = new Texture(Gdx.files.internal("chest/" + chestWearFileName));
+        legWear = new Texture(Gdx.files.internal("legs/" + legWearFileName));
+        feetWear = new Texture(Gdx.files.internal("feet/" + feetWearFileName));
     }
 
     public void render(SpriteBatch batch) {

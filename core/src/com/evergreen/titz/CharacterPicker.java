@@ -18,14 +18,14 @@ public class CharacterPicker implements Screen {
     public CharacterPicker(final CharacterCustomization game) {
         this.game = game;
 
-
+        character = new Character("metal_helm_male.png", "chest_male.png", "metal_pants_male.png", "metal_boots_male.png", Genders.GENDERS.MALE);
 
         //animation = new CharacterAnimation("body/male/tanned.png");
     }
 
     @Override
     public void show() {
-        animation.chooseAnimation(SpritesheetValues.WALK_FRONT);
+        //animation.chooseAnimation(SpritesheetValues.WALK_FRONT);
     }
 
     @Override
@@ -52,9 +52,10 @@ public class CharacterPicker implements Screen {
 
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             animation.chooseAnimation(SpritesheetValues.WALK_FRONT);
-        }
+        }*/
+        character.render(game.batch);
 
-        game.batch.end();*/
+        game.batch.end();
     }
 
     @Override
