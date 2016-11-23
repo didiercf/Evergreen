@@ -1,8 +1,6 @@
 package com.evergreen.titz;
 
-/**
- * Created by apollo on 11/12/2016.
- */
+
 public enum SpritesheetValues {
     WALK_BACK(8, 1, 8),
     WALK_LEFT(9, 1, 8),
@@ -11,7 +9,7 @@ public enum SpritesheetValues {
     SHOOT_BACK(16, 1, 12),
     SHOOT_LEFT(17, 1, 12),
     SHOOT_FRONT(18, 1, 12),
-    SHOOT_RIGHT(19, 1, 12),;
+    SHOOT_RIGHT(19, 1, 12);
 
     public int ROW, START_COL, END_COL;
 

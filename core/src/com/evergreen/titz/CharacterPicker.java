@@ -6,9 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-/**
- * Created by 1458214 on 2016-11-15.
- */
 public class CharacterPicker implements Screen {
 
     final CharacterCustomization game;
@@ -16,10 +13,14 @@ public class CharacterPicker implements Screen {
     TextureRegion currentFrame;
     CharacterAnimation animation;
 
+    Character character;
+
     public CharacterPicker(final CharacterCustomization game) {
         this.game = game;
 
-        animation = new CharacterAnimation("tanned.png");
+
+
+        //animation = new CharacterAnimation("body/male/tanned.png");
     }
 
     @Override
@@ -31,10 +32,10 @@ public class CharacterPicker implements Screen {
     public void render(float delta) {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        animation.setStateTime(animation.getStateTime() + Gdx.graphics.getDeltaTime());
-        currentFrame = animation.getSpriteAnimation().getKeyFrame(animation.getStateTime(), true);
+        //animation.setStateTime(animation.getStateTime() + Gdx.graphics.getDeltaTime());
+        //currentFrame = animation.getSpriteAnimation().getKeyFrame(animation.getStateTime(), true);
         game.batch.begin();
-        game.batch.draw(currentFrame, 50, 50);
+        /*game.batch.draw(currentFrame, 50, 50);
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
@@ -53,7 +54,7 @@ public class CharacterPicker implements Screen {
             animation.chooseAnimation(SpritesheetValues.WALK_FRONT);
         }
 
-        game.batch.end();
+        game.batch.end();*/
     }
 
     @Override

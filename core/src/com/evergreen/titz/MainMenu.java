@@ -11,9 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-/**
- * Created by 1458214 on 2016-11-15.
- */
+
 public class MainMenu implements Screen {
 
     final String[] chestWears = { "Chainmail", "Leather Jacket", "Winter Coat", "Naked" };
@@ -54,6 +52,8 @@ public class MainMenu implements Screen {
 
         currentHeadPiece.setDisabled(true);
         currentChestPiece.setDisabled(true);
+        currentLegPiece.setDisabled(true);
+        currentFeetPiece.setDisabled(true);
 
         TextButton btnHeadLeft = new TextButton("<", skin);
         TextButton btnHeadRight = new TextButton(">", skin);
@@ -116,9 +116,8 @@ public class MainMenu implements Screen {
         table.add(btnFeetRight);
 
         table.left();
-
         table.pad(0, Gdx.graphics.getWidth() / 4 - (table.getMinWidth() / 2),  0, 0);
-        //table.setDebug(true);
+        table.setDebug(true);
 
         stage.addActor(table);
     }

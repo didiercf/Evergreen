@@ -5,12 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.utils.Disableable;
 import com.badlogic.gdx.utils.Disposable;
 
-/**
- * Created by apollo on 11/12/2016.
- */
+
 public class CharacterAnimation implements Disposable {
 
     private static final int SPRITESHEET_HEIGHT = 21;
