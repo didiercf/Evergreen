@@ -76,6 +76,18 @@ public class MainMenu implements Screen {
             }
         });
 
+        btnChestLeft.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (indexChestWear > 0)
+                    indexChestWear--;
+                else
+                    indexChestWear = chestWears.length - 1;
+
+                currentChestPiece.setText(chestWears[indexChestWear]);
+            }
+        });
+
         //Head
         table.add(placeholder);
         table.add(headLabel);

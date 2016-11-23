@@ -1,6 +1,7 @@
 package com.evergreen.titz;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -17,7 +18,7 @@ public class CharacterPicker implements Screen {
     public CharacterPicker(final CharacterCustomization game) {
         this.game = game;
 
-        character = new Character("metal_helm_male.png", "chest_male.png", "metal_pants_male.png", "metal_boots_male.png", Genders.MALE.commonName);
+        character = new Character("metal_helm_male.png", "chest_male.png", "metal_pants_male.png", "metal_boots_male.png", Genders.MALE);
 
         //animation = new CharacterAnimation("body/male/tanned.png");
     }
@@ -34,10 +35,10 @@ public class CharacterPicker implements Screen {
         //animation.setStateTime(animation.getStateTime() + Gdx.graphics.getDeltaTime());
         //currentFrame = animation.getSpriteAnimation().getKeyFrame(animation.getStateTime(), true);
         game.batch.begin();
-        /*game.batch.draw(currentFrame, 50, 50);
+        //game.batch.draw(currentFrame, 50, 50);
 
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+        /*if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             animation.chooseAnimation(SpritesheetValues.WALK_BACK);
         }
 
@@ -52,6 +53,7 @@ public class CharacterPicker implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             animation.chooseAnimation(SpritesheetValues.WALK_FRONT);
         }*/
+
         character.render(game.batch);
 
         game.batch.end();
