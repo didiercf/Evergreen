@@ -19,9 +19,9 @@ public class Character {
     private Texture feetWear;
 
     public Character(String headWearFileName, String chestWearFileName, String legWearFileName, String feetWearFileName, String gender) {
-        if (gender.equals(Genders.GENDERS.MALE))
+        if (gender.equals(Genders.MALE))
             characterSheet = new Texture(Gdx.files.internal(DEFAULT_MALE_CHARACTER_SKIN));
-        else if (gender.equals(Genders.GENDERS.FEMALE))
+        else if (gender.equals(Genders.FEMALE))
             characterSheet = new Texture(Gdx.files.internal(DEFAULT_FEMALE_CHARACTER_SKIN));
         else
             throw new IllegalArgumentException();

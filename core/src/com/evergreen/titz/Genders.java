@@ -8,9 +8,9 @@ public enum Genders {
     FEMALE("female"),
     GENDER_FLUID("genderfluid");
     
-    public final String friendlyName; 
+    public final String commonName;
 
     Genders(String name) {
-        this.friendlyName = name;
+        this.commonName = name;
     }
 }

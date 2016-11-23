@@ -117,7 +117,7 @@ public class MainMenu implements Screen {
 
         table.left();
         table.pad(0, Gdx.graphics.getWidth() / 4 - (table.getMinWidth() / 2),  0, 0);
-        table.setDebug(true);
+        //table.setDebug(true);
 
         stage.addActor(table);
     }
