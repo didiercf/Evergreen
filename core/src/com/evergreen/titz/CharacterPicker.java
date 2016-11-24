@@ -1,7 +1,6 @@
 package com.evergreen.titz;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,7 +10,7 @@ public class CharacterPicker implements Screen {
     final CharacterCustomization game;
 
     TextureRegion currentFrame;
-    CharacterAnimation animation;
+    CharacterDisplay animation;
 
     Character character;
 
@@ -20,7 +19,7 @@ public class CharacterPicker implements Screen {
 
         character = new Character("metal_helm_male.png", "chest_male.png", "metal_pants_male.png", "metal_boots_male.png", Genders.MALE);
 
-        //animation = new CharacterAnimation("body/male/tanned.png");
+        //animation = new CharacterDisplay("body/male/tanned.png");
     }
 
     @Override
@@ -54,7 +53,7 @@ public class CharacterPicker implements Screen {
             animation.chooseAnimation(SpritesheetValues.WALK_FRONT);
         }*/
 
-        character.render(game.batch);
+        character.draw(game.batch, delta);
 
         game.batch.end();
     }

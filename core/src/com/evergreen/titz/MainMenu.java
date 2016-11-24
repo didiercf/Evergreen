@@ -1,17 +1,13 @@
 package com.evergreen.titz;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 
 public class MainMenu implements Screen {
@@ -25,8 +21,9 @@ public class MainMenu implements Screen {
     private Stage stage;
     private Skin skin;
     private Table table;
-    private OrthographicCamera camera;
-    private StretchViewport viewPort;
+    private ExtendViewport stageViewPort;
+    private Character character;
+    private CharacterDisplay characterDisplay;
 
     public MainMenu(final CharacterCustomization game) {
         this.game = game;
@@ -34,9 +31,10 @@ public class MainMenu implements Screen {
         int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();
 
-        camera = new OrthographicCamera();
-        viewPort = new StretchViewport(width, height, camera);
-        stage = new Stage(viewPort);
+        character = new Character("metal_helm_male.png", "chest_male.png", "metal_pants_male.png", "metal_boots_male.png", Genders.MALE);
+        characterDisplay = new CharacterDisplay(character);
+        stageViewPort = new ExtendViewport(width, height);
+        stage = new Stage(stageViewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         table = new Table(skin);
 
@@ -139,8 +137,10 @@ public class MainMenu implements Screen {
         table.left();
         table.pad(0, Gdx.graphics.getWidth() / 4 - (table.getMinWidth() / 2),  0, 0);
         //table.setDebug(true);
+        characterDisplay.chooseDisplay(SpritesheetValues.FRONT);
 
         stage.addActor(table);
+        stage.addActor(characterDisplay);
     }
 
     @Override

@@ -2,6 +2,10 @@ package com.evergreen.titz;
 
 
 public enum SpritesheetValues {
+    BACK(0, 0, 0),
+    LEFT(1, 0, 0),
+    FRONT(2, 0, 0),
+    RIGHT(3, 0, 0),
     WALK_BACK(8, 1, 8),
     WALK_LEFT(9, 1, 8),
     WALK_FRONT(10, 1, 8),
