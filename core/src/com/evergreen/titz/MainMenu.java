@@ -4,12 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 
 public class MainMenu implements Screen {
@@ -23,11 +25,18 @@ public class MainMenu implements Screen {
     private Stage stage;
     private Skin skin;
     private Table table;
+    private OrthographicCamera camera;
+    private StretchViewport viewPort;
 
     public MainMenu(final CharacterCustomization game) {
         this.game = game;
 
-        stage = new Stage();
+        int width = Gdx.graphics.getWidth();
+        int height = Gdx.graphics.getHeight();
+
+        camera = new OrthographicCamera();
+        viewPort = new StretchViewport(width, height, camera);
+        stage = new Stage(viewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
         table = new Table(skin);
 
@@ -143,7 +152,7 @@ public class MainMenu implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        stage.getViewport().update(width, height, false);
     }
 
     @Override
