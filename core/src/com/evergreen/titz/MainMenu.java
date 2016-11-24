@@ -12,7 +12,8 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class MainMenu implements Screen {
 
-    final String[] chestWears = { "Chainmail", "Leather Jacket", "Winter Coat", "Naked" };
+    final String[] chestWears = { "Leather Jacket", "Gold" };
+    final String[] chestWearsFiles = { "chest_male_leather.png", "chest_male_gold.png" };
 
     int indexChestWear = 0;
 
@@ -22,7 +23,6 @@ public class MainMenu implements Screen {
     private Skin skin;
     private Table table;
     private ExtendViewport stageViewPort;
-    private Character character;
     private CharacterDisplay characterDisplay;
 
     public MainMenu(final CharacterCustomization game) {
@@ -31,8 +31,8 @@ public class MainMenu implements Screen {
         int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();
 
-        character = new Character("metal_helm_male.png", "chest_male.png", "metal_pants_male.png", "metal_boots_male.png", Genders.MALE);
-        characterDisplay = new CharacterDisplay(character);
+
+        characterDisplay = new CharacterDisplay(new Character("metal_helm_male.png", "chest_male_leather.png", "metal_pants_male.png", "metal_boots_male.png", Genders.MALE));
         stageViewPort = new ExtendViewport(width, height);
         stage = new Stage(stageViewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
@@ -92,6 +92,9 @@ public class MainMenu implements Screen {
                     indexChestWear = chestWears.length - 1;
 
                 currentChestPiece.setText(chestWears[indexChestWear]);
+
+                characterDisplay.getCharacter().setChestWear(chestWearsFiles[indexChestWear]);
+                characterDisplay.draw(stage.getBatch(), Gdx.graphics.getDeltaTime());
             }
         });
 

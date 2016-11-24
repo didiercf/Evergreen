@@ -53,7 +53,7 @@ public class CharacterPicker implements Screen {
             animation.chooseAnimation(SpritesheetValues.WALK_FRONT);
         }*/
 
-        character.draw(game.batch, delta);
+        //character.draw(game.batch, delta);
 
         game.batch.end();
     }

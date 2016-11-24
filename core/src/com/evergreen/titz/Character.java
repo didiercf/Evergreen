@@ -35,6 +35,26 @@ public class Character {
         return feetWear;
     }
 
+    public void setHeadWear(String headWearFile) {
+        headWear = new Texture(Gdx.files.internal("head/" + headWearFile));
+    }
+
+    public void setCharacterSheet(String characterSheetFile) {
+        chestWear = new Texture(Gdx.files.internal("chest/" + characterSheetFile));
+    }
+
+    public void setChestWear(String chestWearFile) {
+        chestWear = new Texture(Gdx.files.internal("chest/" + chestWearFile));
+    }
+
+    public void setLegWear(String legWearFile) {
+        legWear = new Texture(Gdx.files.internal("legs/" + legWearFile));
+    }
+
+    public void setFeetWear(String feetWearFile) {
+        feetWear = new Texture(Gdx.files.internal("feet/" + feetWearFile));
+    }
+
     public Texture[] getWears() {
         Texture[] wears = new Texture[5];
 
@@ -58,7 +78,16 @@ public class Character {
         else if (gender.equals(Genders.FEMALE))
             characterSheet = new Texture(Gdx.files.internal(DEFAULT_FEMALE_CHARACTER_SKIN));
         else
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Nice try being a gender fluid, better luck next time.");
+
+        headWear = new Texture(Gdx.files.internal("head/" + headWearFileName));
+        chestWear = new Texture(Gdx.files.internal("chest/" + chestWearFileName));
+        legWear = new Texture(Gdx.files.internal("legs/" + legWearFileName));
+        feetWear = new Texture(Gdx.files.internal("feet/" + feetWearFileName));
+    }
+
+    public Character(String characterSkinFileName, String headWearFileName, String chestWearFileName, String legWearFileName, String feetWearFileName, Genders gender) {
+        characterSheet = new Texture(Gdx.files.internal("body/" + gender.commonName + "/" + characterSkinFileName));
 
         headWear = new Texture(Gdx.files.internal("head/" + headWearFileName));
         chestWear = new Texture(Gdx.files.internal("chest/" + chestWearFileName));

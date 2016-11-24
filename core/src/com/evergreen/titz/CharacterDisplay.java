@@ -27,9 +27,6 @@ public class CharacterDisplay extends Actor implements Disposable {
     }
 
     public TextureRegion[] getCharacterTextures() {
-        if (characterTextures == null)
-            throw new NullPointerException("Character sprite wasn't chosen");
-
         return characterTextures;
     }
 
@@ -41,12 +38,20 @@ public class CharacterDisplay extends Actor implements Disposable {
         this.stateTime = stateTime;
     }
 
+    public Character getCharacter() {
+        return character;
+    }
+
     private Animation spriteAnimation;
     private TextureRegion[] characterTextures;
     private Texture spriteSheet;
     private TextureRegion[] animationFrames;
     private TextureRegion[][] splitSheet;
     private ArrayList<TextureRegion[][]> sheets;
+
+    private SpritesheetValues displayValue;
+
+    private Character character;
 
     private float stateTime;
 
@@ -60,7 +65,10 @@ public class CharacterDisplay extends Actor implements Disposable {
     }
 
     public CharacterDisplay(Character character) {
+        this.character = character;
+
         sheets = new ArrayList<TextureRegion[][]>();
+        displayValue = SpritesheetValues.FRONT;
 
         for(Texture texture : character.getWears()) {
             TextureRegion[][] tempRegion = TextureRegion.split(texture,
@@ -83,6 +91,8 @@ public class CharacterDisplay extends Actor implements Disposable {
     }
 
     public void chooseDisplay(SpritesheetValues displayValue) {
+        this.displayValue = displayValue;
+
         characterTextures = new TextureRegion[sheets.size()];
 
         for (int i = 0; i < characterTextures.length; i++) {
@@ -92,6 +102,8 @@ public class CharacterDisplay extends Actor implements Disposable {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        chooseDisplay(displayValue);
+
         for(TextureRegion texture : characterTextures) {
             batch.draw(texture, 0, 0);
         }
