@@ -100,8 +100,21 @@ public class CharacterDisplay extends Actor implements Disposable {
         }
     }
 
+    public void reloadTextures() {
+        sheets.clear();
+
+        for(Texture texture : character.getWears()) {
+            TextureRegion[][] tempRegion = TextureRegion.split(texture,
+                    texture.getWidth()/SPRITESHEET_WIDTH,
+                    texture.getHeight()/SPRITESHEET_HEIGHT);
+
+            sheets.add(tempRegion);
+        }
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        reloadTextures();
         chooseDisplay(displayValue);
 
         for(TextureRegion texture : characterTextures) {
