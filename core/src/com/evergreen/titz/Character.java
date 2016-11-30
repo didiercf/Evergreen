@@ -3,103 +3,75 @@ package com.evergreen.titz;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.Renderable;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
+import com.evergreen.titz.Clothes.EnumChestWear;
+import com.evergreen.titz.Clothes.EnumFootWear;
+import com.evergreen.titz.Clothes.EnumHeadWear;
+import com.evergreen.titz.Clothes.EnumLegWear;
 
 public class Character implements Disposable {
 
-    private final String DEFAULT_MALE_CHARACTER_SKIN = "body/male/tanned.png";
-    private final String DEFAULT_FEMALE_CHARACTER_SKIN = "body/female/tanned.png";
+    private static final String DEFAULT_MALE_CHARACTER_SKIN = "body/male/tanned.png";
+    private static final String DEFAULT_FEMALE_CHARACTER_SKIN = "body/female/tanned.png";
 
     private Texture characterSheet;
 
-    public Texture getCharacterSheet() {
+    private Clothes.EnumHeadWear headWear;
+    private Clothes.EnumChestWear chestWear;
+    private Clothes.EnumLegWear legWear;
+    private Clothes.EnumFootWear footWear;
+        
+    public Character(EnumHeadWear headWear, EnumChestWear chestWear, EnumLegWear legWear, EnumFootWear footWear, Genders gender) {
+    	if (gender.equals(Genders.MALE))
+            this.characterSheet = new Texture(Gdx.files.internal(DEFAULT_MALE_CHARACTER_SKIN));
+        else if (gender.equals(Genders.FEMALE))
+            this.characterSheet = new Texture(Gdx.files.internal(DEFAULT_FEMALE_CHARACTER_SKIN));
+        else
+            throw new IllegalArgumentException("Nice try being a gender fluid, better luck next time.");
+    	
+    	this.headWear = headWear;
+    	this.chestWear = chestWear;
+    	this.legWear = legWear;
+    	this.footWear = footWear;
+    }
+
+	public Texture getCharacterSheet() {
         return characterSheet;
     }
+    
+	public void setHeadWear(Clothes.EnumHeadWear headWear) {
+	  this.headWear = headWear;
+	}
+	
+	public void setChestWear(Clothes.EnumChestWear chestWear) {
+		this.chestWear = chestWear;
+	}
 
-    public Texture getHeadWear() {
-        return headWear;
-    }
-
-    public Texture getChestWear() {
-        return chestWear;
-    }
-
-    public Texture getLegWear() {
-        return legWear;
-    }
-
-    public Texture getFeetWear() {
-        return feetWear;
-    }
-
-    public void setHeadWear(String headWearFile) {
-        headWear = new Texture(Gdx.files.internal("head/" + headWearFile));
-    }
-
-    public void setCharacterSheet(String characterSheetFile) {
-        chestWear = new Texture(Gdx.files.internal("chest/" + characterSheetFile));
-    }
-
-    public void setChestWear(String chestWearFile) {
-        chestWear = new Texture(Gdx.files.internal("chest/" + chestWearFile));
-    }
-
-    public void setLegWear(String legWearFile) {
-        legWear = new Texture(Gdx.files.internal("legs/" + legWearFile));
-    }
-
-    public void setFeetWear(String feetWearFile) {
-        feetWear = new Texture(Gdx.files.internal("feet/" + feetWearFile));
-    }
-
-    public Texture[] getWears() {
+	public void setLegWear(Clothes.EnumLegWear legWear) {
+		this.legWear = legWear;
+	}
+	
+	public void setFeetWear(Clothes.EnumFootWear footWear) {
+		this.footWear = footWear;
+	}
+    
+    public Texture[] getClothesTextures() {
         Texture[] wears = new Texture[5];
 
         wears[0] = characterSheet;
-        wears[1] = headWear;
-        wears[2] = chestWear;
-        wears[3] = legWear;
-        wears[4] = feetWear;
+        wears[1] = headWear.getTexture();
+        wears[2] = chestWear.getTexture();
+        wears[3] = legWear.getTexture();
+        wears[4] = footWear.getTexture();
 
         return wears;
     }
-
-    private Texture headWear;
-    private Texture chestWear;
-    private Texture legWear;
-    private Texture feetWear;
-
-    public Character(String headWearFileName, String chestWearFileName, String legWearFileName, String feetWearFileName, Genders gender) {
-        if (gender.equals(Genders.MALE))
-            characterSheet = new Texture(Gdx.files.internal(DEFAULT_MALE_CHARACTER_SKIN));
-        else if (gender.equals(Genders.FEMALE))
-            characterSheet = new Texture(Gdx.files.internal(DEFAULT_FEMALE_CHARACTER_SKIN));
-        else
-            throw new IllegalArgumentException("Nice try being a gender fluid, better luck next time.");
-
-        headWear = new Texture(Gdx.files.internal("head/" + headWearFileName));
-        chestWear = new Texture(Gdx.files.internal("chest/" + chestWearFileName));
-        legWear = new Texture(Gdx.files.internal("legs/" + legWearFileName));
-        feetWear = new Texture(Gdx.files.internal("feet/" + feetWearFileName));
-    }
-
-    public Character(String characterSkinFileName, String headWearFileName, String chestWearFileName, String legWearFileName, String feetWearFileName, Genders gender) {
-        characterSheet = new Texture(Gdx.files.internal("body/" + gender.commonName + "/" + characterSkinFileName));
-
-        headWear = new Texture(Gdx.files.internal("head/" + headWearFileName));
-        chestWear = new Texture(Gdx.files.internal("chest/" + chestWearFileName));
-        legWear = new Texture(Gdx.files.internal("legs/" + legWearFileName));
-        feetWear = new Texture(Gdx.files.internal("feet/" + feetWearFileName));
-    }
-
-
+    
     @Override
     public void dispose() {
-        for (Texture texture : getWears()) {
+    	// TODO: Dispose of all unused textures
+    	
+        for (Texture texture : getClothesTextures()) {
             texture.dispose();
         }
     }

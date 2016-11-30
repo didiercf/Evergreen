@@ -1,21 +1,20 @@
 package com.evergreen.titz;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 
-public class MainMenu implements Screen {
-
-    final String[] chestWears = { "Leather Jacket", "Gold" };
-    final String[] chestWearsFiles = { "chest_male_leather.png", "chest_male_gold.png" };
-
-    int indexChestWear = 0;
+public class MainMenu extends ScreenAdapter {
 
     final CharacterCustomization game;
 
@@ -46,13 +45,13 @@ public class MainMenu implements Screen {
         int height = Gdx.graphics.getHeight();
 
 
-        characterDisplay = new CharacterDisplay(new Character("metal_helm_male.png", "chest_male_leather.png", "metal_pants_male.png", "metal_boots_male.png", Genders.MALE));
+        characterDisplay = new CharacterDisplay(new Character(Clothes.EnumHeadWear.METAL_HELM, Clothes.EnumChestWear.LEATHER_JACKET, Clothes.EnumLegWear.METAL_PANTS, Clothes.EnumFootWear.METAL_BOOTS, Genders.MALE));
         stageViewPort = new ExtendViewport(width, height);
         stage = new Stage(stageViewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
         currentHeadPiece = new TextField("Hat", skin);
-        currentChestPiece = new TextField(chestWears[indexChestWear], skin);
+        currentChestPiece = new TextField(Clothes.EnumChestWear.values()[characterDisplay.indexChestWear].name, skin);
         currentLegPiece = new TextField("Jeans", skin);
         currentFeetPiece = new TextField("Crocs", skin);
 
@@ -132,6 +131,22 @@ public class MainMenu implements Screen {
 
         stage.addActor(table);
         stage.addActor(characterDisplay);
+        
+        btnChestRight.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.nextChest();
+                currentChestPiece.setText(Clothes.EnumChestWear.values()[characterDisplay.indexChestWear].name);		
+            }
+        });
+
+        btnChestLeft.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.previousChest();
+                currentChestPiece.setText(Clothes.EnumChestWear.values()[characterDisplay.indexChestWear].name);
+            }
+        });
     }
 
     @Override
@@ -139,53 +154,11 @@ public class MainMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
-        btnChestRight.addListener( new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (indexChestWear < chestWears.length - 1)
-                    indexChestWear++;
-                else
-                    indexChestWear = 0;
-
-                currentChestPiece.setText(chestWears[indexChestWear]);
-            }
-        });
-
-        btnChestLeft.addListener( new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (indexChestWear > 0)
-                    indexChestWear--;
-                else
-                    indexChestWear = chestWears.length - 1;
-
-                currentChestPiece.setText(chestWears[indexChestWear]);
-
-                characterDisplay.getCharacter().setChestWear(chestWearsFiles[indexChestWear]);
-                stage.draw();
-            }
-        });
     }
 
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, false);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
     }
 
     @Override

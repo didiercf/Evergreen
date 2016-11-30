@@ -1,15 +1,14 @@
 package com.evergreen.titz;
 
 
-import com.badlogic.gdx.Gdx;
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
-
-import java.util.ArrayList;
+import com.evergreen.titz.Clothes.EnumChestWear;
 
 
 public class CharacterDisplay extends Actor implements Disposable {
@@ -23,6 +22,8 @@ public class CharacterDisplay extends Actor implements Disposable {
     private SpritesheetValues displayValue;
     private Character character;
 
+    public int indexChestWear = 0;
+    
     public TextureRegion[] getCharacterTextures() {
         return characterTextures;
     }
@@ -37,7 +38,7 @@ public class CharacterDisplay extends Actor implements Disposable {
         sheets = new ArrayList<TextureRegion[][]>();
         displayValue = SpritesheetValues.FRONT;
 
-        for(Texture texture : character.getWears()) {
+        for(Texture texture : character.getClothesTextures()) {
             TextureRegion[][] tempRegion = TextureRegion.split(texture,
                                                                 texture.getWidth()/SPRITESHEET_WIDTH,
                                                                 texture.getHeight()/SPRITESHEET_HEIGHT);
@@ -59,7 +60,7 @@ public class CharacterDisplay extends Actor implements Disposable {
     public void reloadTextures() {
         sheets.clear();
 
-        for(Texture texture : character.getWears()) {
+        for(Texture texture : character.getClothesTextures()) {
             TextureRegion[][] tempRegion = TextureRegion.split(texture,
                     texture.getWidth()/SPRITESHEET_WIDTH,
                     texture.getHeight()/SPRITESHEET_HEIGHT);
@@ -77,6 +78,23 @@ public class CharacterDisplay extends Actor implements Disposable {
             batch.draw(texture, 0, 0);
         }
     }
+    
+    public void nextChest() {
+		if (indexChestWear < Clothes.EnumChestWear.values().length - 1)
+        	indexChestWear++;
+        else
+        	indexChestWear = 0;
+		
+		character.setChestWear(EnumChestWear.values()[indexChestWear]);
+	}
+    
+	public void previousChest() {
+		if (indexChestWear > 0)
+        	indexChestWear--;
+        else
+        	indexChestWear = Clothes.EnumChestWear.values().length - 1;
+		character.setChestWear(EnumChestWear.values()[indexChestWear]);
+	}
 
     @Override
     public void dispose() {

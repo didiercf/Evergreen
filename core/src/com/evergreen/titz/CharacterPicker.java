@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.evergreen.titz.Clothes.EnumChestWear;
+import com.evergreen.titz.Clothes.EnumFootWear;
+import com.evergreen.titz.Clothes.EnumHeadWear;
+import com.evergreen.titz.Clothes.EnumLegWear;
 
 public class CharacterPicker implements Screen {
 
@@ -17,7 +21,7 @@ public class CharacterPicker implements Screen {
     public CharacterPicker(final CharacterCustomization game) {
         this.game = game;
 
-        character = new Character("metal_helm_male.png", "chest_male.png", "metal_pants_male.png", "metal_boots_male.png", Genders.MALE);
+        character = new Character(EnumHeadWear.METAL_HELM, EnumChestWear.LEATHER_JACKET, EnumLegWear.METAL_PANTS, EnumFootWear.METAL_BOOTS, Genders.MALE);
 
         //animation = new CharacterDisplay("body/male/tanned.png");
     }
