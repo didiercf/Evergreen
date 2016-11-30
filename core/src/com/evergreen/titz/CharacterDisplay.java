@@ -14,54 +14,21 @@ import java.util.ArrayList;
 
 public class CharacterDisplay extends Actor implements Disposable {
 
+    //Constants
     private static final int SPRITESHEET_HEIGHT = 21;
     private static final int SPRITESHEET_WIDTH = 13;
 
-    private static final float ANIMATION_SPEED = 0.15f;
-
-    public Animation getSpriteAnimation() {
-        if (spriteAnimation == null)
-            throw new NullPointerException("Animation type wasn't chosen");
-
-        return spriteAnimation;
-    }
+    private TextureRegion[] characterTextures;
+    private ArrayList<TextureRegion[][]> sheets;
+    private SpritesheetValues displayValue;
+    private Character character;
 
     public TextureRegion[] getCharacterTextures() {
         return characterTextures;
     }
 
-    public float getStateTime() {
-        return stateTime;
-    }
-
-    public void setStateTime(float stateTime) {
-        this.stateTime = stateTime;
-    }
-
     public Character getCharacter() {
         return character;
-    }
-
-    private Animation spriteAnimation;
-    private TextureRegion[] characterTextures;
-    private Texture spriteSheet;
-    private TextureRegion[] animationFrames;
-    private TextureRegion[][] splitSheet;
-    private ArrayList<TextureRegion[][]> sheets;
-
-    private SpritesheetValues displayValue;
-
-    private Character character;
-
-    private float stateTime;
-
-    public CharacterDisplay(String spriteSheetPath) {
-        spriteSheet = new Texture(Gdx.files.internal(spriteSheetPath));
-        splitSheet = TextureRegion.split(spriteSheet,
-                                            spriteSheet.getWidth()/SPRITESHEET_WIDTH,
-                                            spriteSheet.getHeight()/SPRITESHEET_HEIGHT );
-
-        stateTime = 0f;
     }
 
     public CharacterDisplay(Character character) {
@@ -77,17 +44,6 @@ public class CharacterDisplay extends Actor implements Disposable {
 
             sheets.add(tempRegion);
         }
-    }
-
-    public void chooseAnimation(SpritesheetValues animationValues) {
-        animationFrames = new TextureRegion[animationValues.END_COL];
-
-        int index = 0;
-        for (int i = animationValues.START_COL; i <= animationValues.END_COL; i++) {
-            animationFrames[index++] = splitSheet[animationValues.ROW][i];
-        }
-
-        spriteAnimation = new Animation(ANIMATION_SPEED, animationFrames);
     }
 
     public void chooseDisplay(SpritesheetValues displayValue) {
@@ -124,6 +80,6 @@ public class CharacterDisplay extends Actor implements Disposable {
 
     @Override
     public void dispose() {
-        spriteSheet.dispose();
+        character.dispose();
     }
 }

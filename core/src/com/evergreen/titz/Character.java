@@ -7,8 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Disposable;
 
-public class Character {
+public class Character implements Disposable {
 
     private final String DEFAULT_MALE_CHARACTER_SKIN = "body/male/tanned.png";
     private final String DEFAULT_FEMALE_CHARACTER_SKIN = "body/female/tanned.png";
@@ -93,5 +94,13 @@ public class Character {
         chestWear = new Texture(Gdx.files.internal("chest/" + chestWearFileName));
         legWear = new Texture(Gdx.files.internal("legs/" + legWearFileName));
         feetWear = new Texture(Gdx.files.internal("feet/" + feetWearFileName));
+    }
+
+
+    @Override
+    public void dispose() {
+        for (Texture texture : getWears()) {
+            texture.dispose();
+        }
     }
 }

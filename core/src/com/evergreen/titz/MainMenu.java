@@ -25,6 +25,20 @@ public class MainMenu implements Screen {
     private ExtendViewport stageViewPort;
     private CharacterDisplay characterDisplay;
 
+    TextButton btnHeadLeft;
+    TextButton btnHeadRight;
+    TextButton btnChestLeft;
+    TextButton btnChestRight;
+    TextButton btnLegLeft;
+    TextButton btnLegRight;
+    TextButton btnFeetLeft;
+    TextButton btnFeetRight;
+
+    final TextField currentHeadPiece;
+    final TextField currentChestPiece;
+    final TextField currentLegPiece;
+    final TextField currentFeetPiece;
+
     public MainMenu(final CharacterCustomization game) {
         this.game = game;
 
@@ -36,6 +50,12 @@ public class MainMenu implements Screen {
         stageViewPort = new ExtendViewport(width, height);
         stage = new Stage(stageViewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+
+        currentHeadPiece = new TextField("Hat", skin);
+        currentChestPiece = new TextField(chestWears[indexChestWear], skin);
+        currentLegPiece = new TextField("Jeans", skin);
+        currentFeetPiece = new TextField("Crocs", skin);
+
         table = new Table(skin);
 
         table.setFillParent(true);
@@ -52,51 +72,19 @@ public class MainMenu implements Screen {
         Label legsLabel = new Label("Legs : ", skin);
         Label feetLabel = new Label("Feet : ", skin);
 
-        final TextField currentHeadPiece = new TextField("Hat", skin);
-        final TextField currentChestPiece = new TextField(chestWears[indexChestWear], skin);
-        final TextField currentLegPiece = new TextField("Jeans", skin);
-        final TextField currentFeetPiece = new TextField("Crocs", skin);
+        btnHeadLeft = new TextButton("<", skin);
+        btnHeadRight = new TextButton(">", skin);
+        btnChestLeft = new TextButton("<", skin);
+        btnChestRight = new TextButton(">", skin);
+        btnLegLeft = new TextButton("<", skin);
+        btnLegRight = new TextButton(">", skin);
+        btnFeetLeft = new TextButton("<", skin);
+        btnFeetRight = new TextButton(">", skin);
 
         currentHeadPiece.setDisabled(true);
         currentChestPiece.setDisabled(true);
         currentLegPiece.setDisabled(true);
         currentFeetPiece.setDisabled(true);
-
-        TextButton btnHeadLeft = new TextButton("<", skin);
-        TextButton btnHeadRight = new TextButton(">", skin);
-        TextButton btnChestLeft = new TextButton("<", skin);
-        TextButton btnChestRight = new TextButton(">", skin);
-        TextButton btnLegLeft = new TextButton("<", skin);
-        TextButton btnLegRight = new TextButton(">", skin);
-        TextButton btnFeetLeft = new TextButton("<", skin);
-        TextButton btnFeetRight = new TextButton(">", skin);
-
-        btnChestRight.addListener( new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (indexChestWear < chestWears.length - 1)
-                    indexChestWear++;
-                else
-                    indexChestWear = 0;
-
-                currentChestPiece.setText(chestWears[indexChestWear]);
-            }
-        });
-
-        btnChestLeft.addListener( new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (indexChestWear > 0)
-                    indexChestWear--;
-                else
-                    indexChestWear = chestWears.length - 1;
-
-                currentChestPiece.setText(chestWears[indexChestWear]);
-
-                characterDisplay.getCharacter().setChestWear(chestWearsFiles[indexChestWear]);
-                characterDisplay.draw(stage.getBatch(), Gdx.graphics.getDeltaTime());
-            }
-        });
 
         //Head
         table.add(placeholder);
@@ -151,6 +139,33 @@ public class MainMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+
+        btnChestRight.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (indexChestWear < chestWears.length - 1)
+                    indexChestWear++;
+                else
+                    indexChestWear = 0;
+
+                currentChestPiece.setText(chestWears[indexChestWear]);
+            }
+        });
+
+        btnChestLeft.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (indexChestWear > 0)
+                    indexChestWear--;
+                else
+                    indexChestWear = chestWears.length - 1;
+
+                currentChestPiece.setText(chestWears[indexChestWear]);
+
+                characterDisplay.getCharacter().setChestWear(chestWearsFiles[indexChestWear]);
+                stage.draw();
+            }
+        });
     }
 
     @Override
