@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
-import com.evergreen.titz.Clothes.EnumChestWear;
+import com.evergreen.titz.Clothes.*;
 
 
 public class CharacterDisplay extends Actor implements Disposable {
@@ -22,7 +22,10 @@ public class CharacterDisplay extends Actor implements Disposable {
     private SpritesheetValues displayValue;
     private Character character;
 
+    public int indexHeadWear = 0;
     public int indexChestWear = 0;
+    public int indexLegWear = 0;
+    public int indexFeetWear = 0;
     
     public TextureRegion[] getCharacterTextures() {
         return characterTextures;
@@ -78,6 +81,26 @@ public class CharacterDisplay extends Actor implements Disposable {
             batch.draw(texture, 0, 0);
         }
     }
+
+    //==================Index changing===================
+
+    public void nextHead() {
+        if (indexHeadWear < Clothes.EnumHeadWear.values().length - 1)
+            indexHeadWear++;
+        else
+            indexHeadWear = 0;
+
+        character.setHeadWear(EnumHeadWear.values()[indexHeadWear]);
+    }
+
+    public void previousHead() {
+        if (indexHeadWear > 0)
+            indexHeadWear--;
+        else
+            indexHeadWear = EnumHeadWear.values().length - 1;
+
+        character.setHeadWear(EnumHeadWear.values()[indexHeadWear]);
+    }
     
     public void nextChest() {
 		if (indexChestWear < Clothes.EnumChestWear.values().length - 1)
@@ -95,6 +118,22 @@ public class CharacterDisplay extends Actor implements Disposable {
         	indexChestWear = Clothes.EnumChestWear.values().length - 1;
 		character.setChestWear(EnumChestWear.values()[indexChestWear]);
 	}
+
+	public void nextLeg() {
+
+    }
+
+    public void previousLeg() {
+
+    }
+
+    public void nextFeet() {
+
+    }
+
+    public void previousFeet() {
+
+    }
 
     @Override
     public void dispose() {

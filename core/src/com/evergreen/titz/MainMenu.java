@@ -50,7 +50,7 @@ public class MainMenu extends ScreenAdapter {
         stage = new Stage(stageViewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
-        currentHeadPiece = new TextField("Hat", skin);
+        currentHeadPiece = new TextField(Clothes.EnumHeadWear.values()[characterDisplay.indexHeadWear].name, skin);
         currentChestPiece = new TextField(Clothes.EnumChestWear.values()[characterDisplay.indexChestWear].name, skin);
         currentLegPiece = new TextField("Jeans", skin);
         currentFeetPiece = new TextField("Crocs", skin);
@@ -131,7 +131,23 @@ public class MainMenu extends ScreenAdapter {
 
         stage.addActor(table);
         stage.addActor(characterDisplay);
-        
+
+        btnHeadRight.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.nextHead();
+                currentHeadPiece.setText(Clothes.EnumHeadWear.values()[characterDisplay.indexHeadWear].name);
+            }
+        });
+
+        btnHeadLeft.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.previousHead();
+                currentHeadPiece.setText(Clothes.EnumHeadWear.values()[characterDisplay.indexHeadWear].name);
+            }
+        });
+
         btnChestRight.addListener( new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
