@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Clothes {
 	public enum EnumHeadWear {
-		METAL_HELM("Metal helm", "metal_helm_male.png");
+		METAL_HELM("Metal helm", "metal_helm_male.png"),
+		GOLD_HELM("Gold Helm", "golden_helm_male.png"),
+		CHAINHAT("Chain Hat", "chainhat_male.png");
 		
 		public final String name, path;
 		
@@ -50,7 +52,8 @@ public class Clothes {
 	}
 	
 	public enum EnumLegWear {
-		METAL_PANTS("Metal pants", "metal_pants_male.png");
+		METAL_PANTS("Metal pants", "metal_pants_male.png"),
+		GOLD_PANTS("Gold Pants", "golden_greaves_male.png");
 		
 		public final String name, path;
 		

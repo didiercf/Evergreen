@@ -85,7 +85,7 @@ public class CharacterDisplay extends Actor implements Disposable {
     //==================Index changing===================
 
     public void nextHead() {
-        if (indexHeadWear < Clothes.EnumHeadWear.values().length - 1)
+        if (indexHeadWear < EnumHeadWear.values().length - 1)
             indexHeadWear++;
         else
             indexHeadWear = 0;
@@ -103,7 +103,7 @@ public class CharacterDisplay extends Actor implements Disposable {
     }
     
     public void nextChest() {
-		if (indexChestWear < Clothes.EnumChestWear.values().length - 1)
+		if (indexChestWear < EnumChestWear.values().length - 1)
         	indexChestWear++;
         else
         	indexChestWear = 0;
@@ -115,16 +115,27 @@ public class CharacterDisplay extends Actor implements Disposable {
 		if (indexChestWear > 0)
         	indexChestWear--;
         else
-        	indexChestWear = Clothes.EnumChestWear.values().length - 1;
+        	indexChestWear = EnumChestWear.values().length - 1;
+
 		character.setChestWear(EnumChestWear.values()[indexChestWear]);
 	}
 
 	public void nextLeg() {
+        if (indexLegWear < EnumLegWear.values().length - 1)
+            indexLegWear++;
+        else
+            indexChestWear = 0;
 
+        character.setLegWear(EnumLegWear.values()[indexLegWear]);
     }
 
     public void previousLeg() {
+        if (indexLegWear > 0)
+            indexLegWear--;
+        else
+            indexLegWear = EnumLegWear.values().length - 1;
 
+        character.setLegWear(EnumLegWear.values()[indexLegWear]);
     }
 
     public void nextFeet() {
