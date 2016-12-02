@@ -3,6 +3,7 @@ package com.evergreen.titz;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -42,13 +43,7 @@ public class CharacterDisplay extends Actor implements Disposable {
         sheets = new ArrayList<TextureRegion[][]>();
         displayValue = SpritesheetValues.FRONT;
 
-        for(Texture texture : character.getTraitsTextures()) {
-            TextureRegion[][] tempRegion = TextureRegion.split(texture,
-                                                                texture.getWidth()/SPRITESHEET_WIDTH,
-                                                                texture.getHeight()/SPRITESHEET_HEIGHT);
-
-            sheets.add(tempRegion);
-        }
+        loadTextures();
     }
 
     /**
@@ -67,7 +62,7 @@ public class CharacterDisplay extends Actor implements Disposable {
     /**
      * Reloads the current textures for drawing
      */
-    private void reloadTextures() {
+    private void loadTextures() {
         sheets.clear();
 
         for(Texture texture : character.getTraitsTextures()) {
@@ -86,11 +81,21 @@ public class CharacterDisplay extends Actor implements Disposable {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        reloadTextures();
+        loadTextures();
         chooseDisplay(displayValue);
 
         for(TextureRegion texture : characterTextures) {
-            batch.draw(texture, 0, 0);
+
+            float windowWidth = Gdx.graphics.getWidth();
+            float windowHeight = Gdx.graphics.getHeight();
+            float textureWidth = texture.getRegionWidth();
+            float textureHeight = texture.getRegionHeight();
+
+            batch.draw(texture,
+                        (windowWidth - (windowWidth / 4)) - (windowWidth / 4),
+                        (windowHeight / 2) - (windowHeight / 4),
+                        windowWidth / 2.5f,
+                        windowHeight / 2);
         }
     }
 

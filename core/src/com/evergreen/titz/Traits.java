@@ -98,7 +98,16 @@ public class Traits {
 	}
 
 	public enum EnumSkins {
-		DEFAULT_MALE("Tanned", "tanned.png", Genders.MALE),
+		LIGHT_MALE("Light", "light.png", Genders.MALE),
+		TANNED_MALE("Tanned", "tanned.png", Genders.MALE),
+		TANNED_MALE_2("Tanned 2", "tanned2.png", Genders.MALE),
+		DARK_MALE("Dark", "dark.png", Genders.MALE),
+		DARK_MALE_2("Dark 2", "dark2.png", Genders.MALE),
+		DARK_ELF_MALE("Dark Elf", "darkelf.png", Genders.MALE),
+		DARK_ELF_MALE_2("Dark Elf 2", "darkelf2.png", Genders.MALE),
+		ORC_MALE("Orc", "orc.png", Genders.MALE),
+		RED_ORC_MALE("Red Orc", "red_orc.png", Genders.MALE),
+		SKELETON_MALE("Skeleton", "skeleton.png", Genders.MALE),
 		DEFAULT_FEMALE("Tanned", "tanned.png", Genders.FEMALE);
 
 		public final String name, path;

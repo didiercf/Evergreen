@@ -1,7 +1,6 @@
 package com.evergreen.titz;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Disposable;
 import com.evergreen.titz.Traits.EnumChestWear;
@@ -22,7 +21,7 @@ public class Character implements Disposable {
     private Traits.EnumSkins skinType;
         
     public Character(EnumHeadWear headWear, EnumChestWear chestWear, EnumLegWear legWear, EnumFootWear footWear) {
-        skinType = EnumSkins.DEFAULT_MALE;
+        skinType = EnumSkins.TANNED_MALE;
     	
     	this.headWear = headWear;
     	this.chestWear = chestWear;

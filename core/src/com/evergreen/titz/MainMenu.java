@@ -1,6 +1,7 @@
 package com.evergreen.titz;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 
 public class MainMenu extends ScreenAdapter {
@@ -21,7 +23,7 @@ public class MainMenu extends ScreenAdapter {
     private Stage stage;
     private Skin skin;
     private Table table;
-    private ExtendViewport stageViewPort;
+    private StretchViewport stageViewPort;
     private CharacterDisplay characterDisplay;
 
     private final TextField currentSkinPiece;
@@ -38,7 +40,7 @@ public class MainMenu extends ScreenAdapter {
 
 
         characterDisplay = new CharacterDisplay(new Character(Traits.EnumHeadWear.METAL_HELM, Traits.EnumChestWear.LEATHER_JACKET, Traits.EnumLegWear.METAL_PANTS, Traits.EnumFootWear.METAL_BOOTS));
-        stageViewPort = new ExtendViewport(width, height);
+        stageViewPort = new StretchViewport(width, height);
         stage = new Stage(stageViewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
@@ -141,6 +143,22 @@ public class MainMenu extends ScreenAdapter {
 
 
         //=============Button Listeners=============
+        btnSkinRight.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.nextSkin();
+                currentSkinPiece.setText(Traits.EnumSkins.values()[characterDisplay.indexSkinType].name);
+            }
+        });
+
+        btnSkinLeft.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.previousSkin();
+                currentSkinPiece.setText(Traits.EnumSkins.values()[characterDisplay.indexSkinType].name);
+            }
+        });
+
         btnHeadRight.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -209,7 +227,8 @@ public class MainMenu extends ScreenAdapter {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(Gdx.graphics.getDeltaTime());
+        stage.act(delta);
+
         stage.draw();
     }
 
