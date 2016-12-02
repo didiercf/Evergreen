@@ -50,6 +50,9 @@ public class CharacterDisplay extends Actor implements Disposable {
         }
     }
 
+    /**
+     * Chooses a display type; front, back, left or right
+     */
     public void chooseDisplay(SpritesheetValues displayValue) {
         this.displayValue = displayValue;
 
@@ -60,7 +63,10 @@ public class CharacterDisplay extends Actor implements Disposable {
         }
     }
 
-    public void reloadTextures() {
+    /**
+     * Reloads the current textures for drawing
+     */
+    private void reloadTextures() {
         sheets.clear();
 
         for(Texture texture : character.getClothesTextures()) {

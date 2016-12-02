@@ -24,19 +24,10 @@ public class MainMenu extends ScreenAdapter {
     private ExtendViewport stageViewPort;
     private CharacterDisplay characterDisplay;
 
-    TextButton btnHeadLeft;
-    TextButton btnHeadRight;
-    TextButton btnChestLeft;
-    TextButton btnChestRight;
-    TextButton btnLegLeft;
-    TextButton btnLegRight;
-    TextButton btnFeetLeft;
-    TextButton btnFeetRight;
-
-    final TextField currentHeadPiece;
-    final TextField currentChestPiece;
-    final TextField currentLegPiece;
-    final TextField currentFeetPiece;
+    private final TextField currentHeadPiece;
+    private final TextField currentChestPiece;
+    private final TextField currentLegPiece;
+    private final TextField currentFeetPiece;
 
     public MainMenu(final CharacterCustomization game) {
         this.game = game;
@@ -71,14 +62,14 @@ public class MainMenu extends ScreenAdapter {
         Label legsLabel = new Label("Legs : ", skin);
         Label feetLabel = new Label("Feet : ", skin);
 
-        btnHeadLeft = new TextButton("<", skin);
-        btnHeadRight = new TextButton(">", skin);
-        btnChestLeft = new TextButton("<", skin);
-        btnChestRight = new TextButton(">", skin);
-        btnLegLeft = new TextButton("<", skin);
-        btnLegRight = new TextButton(">", skin);
-        btnFeetLeft = new TextButton("<", skin);
-        btnFeetRight = new TextButton(">", skin);
+        TextButton btnHeadLeft = new TextButton("<", skin);
+        TextButton btnHeadRight = new TextButton(">", skin);
+        TextButton btnChestLeft = new TextButton("<", skin);
+        TextButton btnChestRight = new TextButton(">", skin);
+        TextButton btnLegLeft = new TextButton("<", skin);
+        TextButton btnLegRight = new TextButton(">", skin);
+        TextButton btnFeetLeft = new TextButton("<", skin);
+        TextButton btnFeetRight = new TextButton(">", skin);
 
         currentHeadPiece.setDisabled(true);
         currentChestPiece.setDisabled(true);
@@ -132,6 +123,8 @@ public class MainMenu extends ScreenAdapter {
         stage.addActor(table);
         stage.addActor(characterDisplay);
 
+
+        //=============Button Listeners=============
         btnHeadRight.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
