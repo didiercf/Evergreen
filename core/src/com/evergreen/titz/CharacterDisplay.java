@@ -22,6 +22,7 @@ public class CharacterDisplay extends Actor implements Disposable {
     private SpritesheetValues displayValue;
     private Character character;
 
+    public int indexSkinType = 0;
     public int indexHeadWear = 0;
     public int indexChestWear = 0;
     public int indexLegWear = 0;
@@ -41,7 +42,7 @@ public class CharacterDisplay extends Actor implements Disposable {
         sheets = new ArrayList<TextureRegion[][]>();
         displayValue = SpritesheetValues.FRONT;
 
-        for(Texture texture : character.getClothesTextures()) {
+        for(Texture texture : character.getTraitsTextures()) {
             TextureRegion[][] tempRegion = TextureRegion.split(texture,
                                                                 texture.getWidth()/SPRITESHEET_WIDTH,
                                                                 texture.getHeight()/SPRITESHEET_HEIGHT);
@@ -69,7 +70,7 @@ public class CharacterDisplay extends Actor implements Disposable {
     private void reloadTextures() {
         sheets.clear();
 
-        for(Texture texture : character.getClothesTextures()) {
+        for(Texture texture : character.getTraitsTextures()) {
             TextureRegion[][] tempRegion = TextureRegion.split(texture,
                     texture.getWidth()/SPRITESHEET_WIDTH,
                     texture.getHeight()/SPRITESHEET_HEIGHT);
@@ -94,6 +95,24 @@ public class CharacterDisplay extends Actor implements Disposable {
     }
 
     //==================Index changing===================
+
+    public void nextSkin() {
+        if (indexSkinType < EnumSkins.values().length - 1)
+            indexSkinType++;
+        else
+            indexSkinType = 0;
+
+        character.setSkinType(EnumSkins.values()[indexSkinType]);
+    }
+
+    public void previousSkin() {
+        if (indexSkinType > 0)
+            indexSkinType--;
+        else
+            indexSkinType = EnumSkins.values().length - 1;
+
+        character.setSkinType(EnumSkins.values()[indexSkinType]);
+    }
 
     public void nextHead() {
         if (indexHeadWear < EnumHeadWear.values().length - 1)

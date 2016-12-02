@@ -98,8 +98,8 @@ public class Traits {
 	}
 
 	public enum EnumSkins {
-		DEFAULT_MALE("default", "tanned.png", Genders.MALE),
-		DEFAULT_FEMALE("default", "tanned.png", Genders.FEMALE);
+		DEFAULT_MALE("Tanned", "tanned.png", Genders.MALE),
+		DEFAULT_FEMALE("Tanned", "tanned.png", Genders.FEMALE);
 
 		public final String name, path;
 		public final Genders gender;

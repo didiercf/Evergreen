@@ -15,8 +15,6 @@ public class Character implements Disposable {
     private static final String DEFAULT_MALE_CHARACTER_SKIN = "body/male/tanned.png";
     private static final String DEFAULT_FEMALE_CHARACTER_SKIN = "body/female/tanned.png";
 
-    private Texture characterSheet;
-
     private Traits.EnumHeadWear headWear;
     private Traits.EnumChestWear chestWear;
     private Traits.EnumLegWear legWear;
@@ -24,7 +22,7 @@ public class Character implements Disposable {
     private Traits.EnumSkins skinType;
         
     public Character(EnumHeadWear headWear, EnumChestWear chestWear, EnumLegWear legWear, EnumFootWear footWear) {
-        this.characterSheet = new Texture(Gdx.files.internal(DEFAULT_MALE_CHARACTER_SKIN));
+        skinType = EnumSkins.DEFAULT_MALE;
     	
     	this.headWear = headWear;
     	this.chestWear = chestWear;
@@ -41,8 +39,8 @@ public class Character implements Disposable {
         this.footWear = footWear;
     }
 
-	public Texture getCharacterSheet() {
-        return characterSheet;
+    public void setSkinType(Traits.EnumSkins skinType) {
+        this.skinType = skinType;
     }
     
 	public void setHeadWear(Traits.EnumHeadWear headWear) {
@@ -61,10 +59,10 @@ public class Character implements Disposable {
 		this.footWear = footWear;
 	}
     
-    public Texture[] getClothesTextures() {
+    public Texture[] getTraitsTextures() {
         Texture[] wears = new Texture[5];
 
-        wears[0] = characterSheet;
+        wears[0] = skinType.getTexture();
         wears[1] = headWear.getTexture();
         wears[2] = chestWear.getTexture();
         wears[3] = legWear.getTexture();
@@ -77,7 +75,7 @@ public class Character implements Disposable {
     public void dispose() {
     	// TODO: Dispose of all unused textures
     	
-        for (Texture texture : getClothesTextures()) {
+        for (Texture texture : getTraitsTextures()) {
             texture.dispose();
         }
     }

@@ -24,6 +24,7 @@ public class MainMenu extends ScreenAdapter {
     private ExtendViewport stageViewPort;
     private CharacterDisplay characterDisplay;
 
+    private final TextField currentSkinPiece;
     private final TextField currentHeadPiece;
     private final TextField currentChestPiece;
     private final TextField currentLegPiece;
@@ -41,6 +42,7 @@ public class MainMenu extends ScreenAdapter {
         stage = new Stage(stageViewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
+        currentSkinPiece = new TextField(Traits.EnumSkins.values()[characterDisplay.indexSkinType].name, skin);
         currentHeadPiece = new TextField(Traits.EnumHeadWear.values()[characterDisplay.indexHeadWear].name, skin);
         currentChestPiece = new TextField(Traits.EnumChestWear.values()[characterDisplay.indexChestWear].name, skin);
         currentLegPiece = new TextField(Traits.EnumLegWear.values()[characterDisplay.indexLegWear].name, skin);
@@ -57,11 +59,14 @@ public class MainMenu extends ScreenAdapter {
 
         Label placeholder = new Label("", skin);
 
+        Label skinLabel = new Label("Skin : ", skin);
         Label headLabel = new Label("Head : ", skin);
         Label chestLabel = new Label("Chest : ", skin);
         Label legsLabel = new Label("Legs : ", skin);
         Label feetLabel = new Label("Feet : ", skin);
 
+        TextButton btnSkinLeft = new TextButton("<", skin);
+        TextButton btnSkinRight = new TextButton(">", skin);
         TextButton btnHeadLeft = new TextButton("<", skin);
         TextButton btnHeadRight = new TextButton(">", skin);
         TextButton btnChestLeft = new TextButton("<", skin);
@@ -71,10 +76,21 @@ public class MainMenu extends ScreenAdapter {
         TextButton btnFeetLeft = new TextButton("<", skin);
         TextButton btnFeetRight = new TextButton(">", skin);
 
+        currentSkinPiece.setDisabled(true);
         currentHeadPiece.setDisabled(true);
         currentChestPiece.setDisabled(true);
         currentLegPiece.setDisabled(true);
         currentFeetPiece.setDisabled(true);
+
+        //Skin
+        table.add(placeholder);
+        table.add(skinLabel);
+        table.add(placeholder);
+        table.row();
+        table.add(btnSkinLeft);
+        table.add(currentSkinPiece);
+        table.add(btnSkinRight);
+        table.row();
 
         //Head
         table.add(placeholder);
