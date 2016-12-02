@@ -4,10 +4,11 @@ package com.evergreen.titz;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Disposable;
-import com.evergreen.titz.Clothes.EnumChestWear;
-import com.evergreen.titz.Clothes.EnumFootWear;
-import com.evergreen.titz.Clothes.EnumHeadWear;
-import com.evergreen.titz.Clothes.EnumLegWear;
+import com.evergreen.titz.Traits.EnumChestWear;
+import com.evergreen.titz.Traits.EnumFootWear;
+import com.evergreen.titz.Traits.EnumHeadWear;
+import com.evergreen.titz.Traits.EnumLegWear;
+import com.evergreen.titz.Traits.EnumSkins;
 
 public class Character implements Disposable {
 
@@ -16,18 +17,14 @@ public class Character implements Disposable {
 
     private Texture characterSheet;
 
-    private Clothes.EnumHeadWear headWear;
-    private Clothes.EnumChestWear chestWear;
-    private Clothes.EnumLegWear legWear;
-    private Clothes.EnumFootWear footWear;
+    private Traits.EnumHeadWear headWear;
+    private Traits.EnumChestWear chestWear;
+    private Traits.EnumLegWear legWear;
+    private Traits.EnumFootWear footWear;
+    private Traits.EnumSkins skinType;
         
-    public Character(EnumHeadWear headWear, EnumChestWear chestWear, EnumLegWear legWear, EnumFootWear footWear, Genders gender) {
-    	if (gender.equals(Genders.MALE))
-            this.characterSheet = new Texture(Gdx.files.internal(DEFAULT_MALE_CHARACTER_SKIN));
-        else if (gender.equals(Genders.FEMALE))
-            this.characterSheet = new Texture(Gdx.files.internal(DEFAULT_FEMALE_CHARACTER_SKIN));
-        else
-            throw new IllegalArgumentException("Nice try being a gender fluid, better luck next time.");
+    public Character(EnumHeadWear headWear, EnumChestWear chestWear, EnumLegWear legWear, EnumFootWear footWear) {
+        this.characterSheet = new Texture(Gdx.files.internal(DEFAULT_MALE_CHARACTER_SKIN));
     	
     	this.headWear = headWear;
     	this.chestWear = chestWear;
@@ -35,23 +32,32 @@ public class Character implements Disposable {
     	this.footWear = footWear;
     }
 
+    public Character(EnumHeadWear headWear, EnumChestWear chestWear, EnumLegWear legWear, EnumFootWear footWear, EnumSkins skinType) {
+        this.skinType = skinType;
+
+        this.headWear = headWear;
+        this.chestWear = chestWear;
+        this.legWear = legWear;
+        this.footWear = footWear;
+    }
+
 	public Texture getCharacterSheet() {
         return characterSheet;
     }
     
-	public void setHeadWear(Clothes.EnumHeadWear headWear) {
+	public void setHeadWear(Traits.EnumHeadWear headWear) {
 	  this.headWear = headWear;
 	}
 	
-	public void setChestWear(Clothes.EnumChestWear chestWear) {
+	public void setChestWear(Traits.EnumChestWear chestWear) {
 		this.chestWear = chestWear;
 	}
 
-	public void setLegWear(Clothes.EnumLegWear legWear) {
+	public void setLegWear(Traits.EnumLegWear legWear) {
 		this.legWear = legWear;
 	}
 	
-	public void setFeetWear(Clothes.EnumFootWear footWear) {
+	public void setFeetWear(Traits.EnumFootWear footWear) {
 		this.footWear = footWear;
 	}
     

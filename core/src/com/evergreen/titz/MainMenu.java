@@ -45,15 +45,15 @@ public class MainMenu extends ScreenAdapter {
         int height = Gdx.graphics.getHeight();
 
 
-        characterDisplay = new CharacterDisplay(new Character(Clothes.EnumHeadWear.METAL_HELM, Clothes.EnumChestWear.LEATHER_JACKET, Clothes.EnumLegWear.METAL_PANTS, Clothes.EnumFootWear.METAL_BOOTS, Genders.MALE));
+        characterDisplay = new CharacterDisplay(new Character(Traits.EnumHeadWear.METAL_HELM, Traits.EnumChestWear.LEATHER_JACKET, Traits.EnumLegWear.METAL_PANTS, Traits.EnumFootWear.METAL_BOOTS));
         stageViewPort = new ExtendViewport(width, height);
         stage = new Stage(stageViewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
-        currentHeadPiece = new TextField(Clothes.EnumHeadWear.values()[characterDisplay.indexHeadWear].name, skin);
-        currentChestPiece = new TextField(Clothes.EnumChestWear.values()[characterDisplay.indexChestWear].name, skin);
-        currentLegPiece = new TextField("Jeans", skin);
-        currentFeetPiece = new TextField("Crocs", skin);
+        currentHeadPiece = new TextField(Traits.EnumHeadWear.values()[characterDisplay.indexHeadWear].name, skin);
+        currentChestPiece = new TextField(Traits.EnumChestWear.values()[characterDisplay.indexChestWear].name, skin);
+        currentLegPiece = new TextField(Traits.EnumLegWear.values()[characterDisplay.indexLegWear].name, skin);
+        currentFeetPiece = new TextField(Traits.EnumFootWear.values()[characterDisplay.indexFeetWear].name, skin);
 
         table = new Table(skin);
 
@@ -136,7 +136,7 @@ public class MainMenu extends ScreenAdapter {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 characterDisplay.nextHead();
-                currentHeadPiece.setText(Clothes.EnumHeadWear.values()[characterDisplay.indexHeadWear].name);
+                currentHeadPiece.setText(Traits.EnumHeadWear.values()[characterDisplay.indexHeadWear].name);
             }
         });
 
@@ -144,7 +144,7 @@ public class MainMenu extends ScreenAdapter {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 characterDisplay.previousHead();
-                currentHeadPiece.setText(Clothes.EnumHeadWear.values()[characterDisplay.indexHeadWear].name);
+                currentHeadPiece.setText(Traits.EnumHeadWear.values()[characterDisplay.indexHeadWear].name);
             }
         });
 
@@ -152,7 +152,7 @@ public class MainMenu extends ScreenAdapter {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 characterDisplay.nextChest();
-                currentChestPiece.setText(Clothes.EnumChestWear.values()[characterDisplay.indexChestWear].name);		
+                currentChestPiece.setText(Traits.EnumChestWear.values()[characterDisplay.indexChestWear].name);
             }
         });
 
@@ -160,7 +160,39 @@ public class MainMenu extends ScreenAdapter {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 characterDisplay.previousChest();
-                currentChestPiece.setText(Clothes.EnumChestWear.values()[characterDisplay.indexChestWear].name);
+                currentChestPiece.setText(Traits.EnumChestWear.values()[characterDisplay.indexChestWear].name);
+            }
+        });
+
+        btnLegRight.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.nextLeg();
+                currentLegPiece.setText(Traits.EnumLegWear.values()[characterDisplay.indexLegWear].name);
+            }
+        });
+
+        btnLegLeft.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.previousLeg();
+                currentLegPiece.setText(Traits.EnumLegWear.values()[characterDisplay.indexLegWear].name);
+            }
+        });
+
+        btnFeetRight.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.nextFeet();
+                currentFeetPiece.setText(Traits.EnumFootWear.values()[characterDisplay.indexFeetWear].name);
+            }
+        });
+
+        btnFeetLeft.addListener( new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                characterDisplay.previousFeet();
+                currentFeetPiece.setText(Traits.EnumFootWear.values()[characterDisplay.indexFeetWear].name);
             }
         });
     }
@@ -180,5 +212,6 @@ public class MainMenu extends ScreenAdapter {
     @Override
     public void dispose() {
         stage.dispose();
+        characterDisplay.dispose();
     }
 }

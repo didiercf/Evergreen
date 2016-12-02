@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
-import com.evergreen.titz.Clothes.*;
+import com.evergreen.titz.Traits.*;
 
 
 public class CharacterDisplay extends Actor implements Disposable {
@@ -73,6 +73,11 @@ public class CharacterDisplay extends Actor implements Disposable {
     }
 
     @Override
+    public void dispose() {
+        character.dispose();
+    }
+
+    @Override
     public void draw(Batch batch, float parentAlpha) {
         reloadTextures();
         chooseDisplay(displayValue);
@@ -124,7 +129,7 @@ public class CharacterDisplay extends Actor implements Disposable {
         if (indexLegWear < EnumLegWear.values().length - 1)
             indexLegWear++;
         else
-            indexChestWear = 0;
+            indexLegWear = 0;
 
         character.setLegWear(EnumLegWear.values()[indexLegWear]);
     }
@@ -139,15 +144,20 @@ public class CharacterDisplay extends Actor implements Disposable {
     }
 
     public void nextFeet() {
+        if (indexFeetWear < EnumFootWear.values().length - 1)
+            indexFeetWear++;
+        else
+            indexFeetWear = 0;
 
+        character.setFeetWear(EnumFootWear.values()[indexFeetWear]);
     }
 
     public void previousFeet() {
+        if (indexFeetWear > 0)
+            indexFeetWear--;
+        else
+            indexFeetWear = EnumFootWear.values().length - 1;
 
-    }
-
-    @Override
-    public void dispose() {
-        character.dispose();
+        character.setFeetWear(EnumFootWear.values()[indexFeetWear]);
     }
 }
