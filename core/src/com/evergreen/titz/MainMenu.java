@@ -1,7 +1,6 @@
 package com.evergreen.titz;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 
@@ -22,7 +20,8 @@ public class MainMenu extends ScreenAdapter {
 
     private Stage stage;
     private Skin skin;
-    private Table table;
+    private Table leftTable;
+    private Table rightTable;
     private StretchViewport stageViewPort;
     private CharacterDisplay characterDisplay;
 
@@ -50,9 +49,10 @@ public class MainMenu extends ScreenAdapter {
         currentLegPiece = new TextField(Traits.EnumLegWear.values()[characterDisplay.indexLegWear].name, skin);
         currentFeetPiece = new TextField(Traits.EnumFootWear.values()[characterDisplay.indexFeetWear].name, skin);
 
-        table = new Table(skin);
+        leftTable = new Table(skin);
+        rightTable = new Table(skin);
 
-        table.setFillParent(true);
+        leftTable.setFillParent(true);
     }
 
     @Override
@@ -85,62 +85,68 @@ public class MainMenu extends ScreenAdapter {
         currentFeetPiece.setDisabled(true);
 
         //Skin
-        table.add(placeholder);
-        table.add(skinLabel);
-        table.add(placeholder);
-        table.row();
-        table.add(btnSkinLeft);
-        table.add(currentSkinPiece);
-        table.add(btnSkinRight);
-        table.row();
+        leftTable.add(placeholder);
+        leftTable.add(skinLabel);
+        leftTable.add(placeholder);
+        leftTable.row();
+        leftTable.add(btnSkinLeft);
+        leftTable.add(currentSkinPiece);
+        leftTable.add(btnSkinRight);
+        leftTable.row();
 
         //Head
-        table.add(placeholder);
-        table.add(headLabel);
-        table.add(placeholder);
-        table.row();
-        table.add(btnHeadLeft);
-        table.add(currentHeadPiece);
-        table.add(btnHeadRight);
-        table.row();
+        leftTable.add(placeholder);
+        leftTable.add(headLabel);
+        leftTable.add(placeholder);
+        leftTable.row();
+        leftTable.add(btnHeadLeft);
+        leftTable.add(currentHeadPiece);
+        leftTable.add(btnHeadRight);
+        leftTable.row();
 
         //Chest
-        table.add(placeholder);
-        table.add(chestLabel);
-        table.add(placeholder);
-        table.row();
-        table.add(btnChestLeft);
-        table.add(currentChestPiece);
-        table.add(btnChestRight);
-        table.row();
+        leftTable.add(placeholder);
+        leftTable.add(chestLabel);
+        leftTable.add(placeholder);
+        leftTable.row();
+        leftTable.add(btnChestLeft);
+        leftTable.add(currentChestPiece);
+        leftTable.add(btnChestRight);
+        leftTable.row();
 
         //Legs
-        table.add(placeholder);
-        table.add(legsLabel);
-        table.add(placeholder);
-        table.row();
-        table.add(btnLegLeft);
-        table.add(currentLegPiece);
-        table.add(btnLegRight);
-        table.row();
+        leftTable.add(placeholder);
+        leftTable.add(legsLabel);
+        leftTable.add(placeholder);
+        leftTable.row();
+        leftTable.add(btnLegLeft);
+        leftTable.add(currentLegPiece);
+        leftTable.add(btnLegRight);
+        leftTable.row();
 
         //Feet
-        table.add(placeholder);
-        table.add(feetLabel);
-        table.add(placeholder);
-        table.row();
-        table.add(btnFeetLeft);
-        table.add(currentFeetPiece);
-        table.add(btnFeetRight);
+        leftTable.add(placeholder);
+        leftTable.add(feetLabel);
+        leftTable.add(placeholder);
+        leftTable.row();
+        leftTable.add(btnFeetLeft);
+        leftTable.add(currentFeetPiece);
+        leftTable.add(btnFeetRight);
 
-        table.left();
-        table.pad(0, Gdx.graphics.getWidth() / 4 - (table.getMinWidth() / 2),  0, 0);
-        //table.setDebug(true);
+        //General left table settings
+        leftTable.left();
+        leftTable.pad(0, Gdx.graphics.getWidth() / 4 - (leftTable.getMinWidth() / 2),  0, 0);
+
         characterDisplay.chooseDisplay(SpritesheetValues.FRONT);
 
-        stage.addActor(table);
-        stage.addActor(characterDisplay);
+        rightTable.add(characterDisplay);
+        rightTable.setDebug(true);
 
+        rightTable.right();
+        rightTable.pad(0, 0, 0, Gdx.graphics.getWidth() / 4 - (rightTable.getMinWidth() / 2));
+
+        stage.addActor(leftTable);
+        stage.addActor(rightTable);
 
         //=============Button Listeners=============
         btnSkinRight.addListener(new ClickListener() {

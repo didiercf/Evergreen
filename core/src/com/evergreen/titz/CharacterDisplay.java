@@ -88,8 +88,6 @@ public class CharacterDisplay extends Actor implements Disposable {
 
             float windowWidth = Gdx.graphics.getWidth();
             float windowHeight = Gdx.graphics.getHeight();
-            float textureWidth = texture.getRegionWidth();
-            float textureHeight = texture.getRegionHeight();
 
             batch.draw(texture,
                         (windowWidth - (windowWidth / 4)) - (windowWidth / 4),
