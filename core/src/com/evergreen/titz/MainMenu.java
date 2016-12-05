@@ -64,7 +64,7 @@ public class MainMenu extends ScreenAdapter {
         Label skinLabel = new Label("Skin : ", skin);
         Label headLabel = new Label("Head : ", skin);
         Label chestLabel = new Label("Chest : ", skin);
-        Label legsLabel = new Label("Legs : ", skin);
+        Label legsLabel = new Label("hairy Legs : ", skin);
         Label feetLabel = new Label("Feet : ", skin);
 
         TextButton btnSkinLeft = new TextButton("<", skin);
