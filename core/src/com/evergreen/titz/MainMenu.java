@@ -11,18 +11,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 public class MainMenu extends ScreenAdapter {
 
-    final CharacterCustomization game;
+    private final CharacterCustomization game;
 
     private Stage stage;
     private Skin skin;
     private Table leftTable;
     private Table rightTable;
-    private StretchViewport stageViewPort;
+    private ExtendViewport stageViewPort;
     private CharacterDisplay characterDisplay;
 
     private final TextField currentSkinPiece;
@@ -39,7 +42,7 @@ public class MainMenu extends ScreenAdapter {
 
 
         characterDisplay = new CharacterDisplay(new Character(Traits.EnumHeadWear.METAL_HELM, Traits.EnumChestWear.LEATHER_JACKET, Traits.EnumLegWear.METAL_PANTS, Traits.EnumFootWear.METAL_BOOTS));
-        stageViewPort = new StretchViewport(width, height);
+        stageViewPort = new ExtendViewport(width, height);
         stage = new Stage(stageViewPort);
         skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
@@ -53,6 +56,7 @@ public class MainMenu extends ScreenAdapter {
         rightTable = new Table(skin);
 
         leftTable.setFillParent(true);
+        rightTable.setFillParent(true);
     }
 
     @Override
@@ -240,7 +244,8 @@ public class MainMenu extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, false);
+        stage.getViewport().update(width, height, true);
+        //stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     }
 
     @Override

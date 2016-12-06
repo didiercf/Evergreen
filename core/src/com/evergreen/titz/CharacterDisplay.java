@@ -75,11 +75,6 @@ public class CharacterDisplay extends Actor implements Disposable {
     }
 
     @Override
-    public void dispose() {
-        character.dispose();
-    }
-
-    @Override
     public void draw(Batch batch, float parentAlpha) {
         loadTextures();
         chooseDisplay(displayValue);
@@ -89,12 +84,22 @@ public class CharacterDisplay extends Actor implements Disposable {
             float windowWidth = Gdx.graphics.getWidth();
             float windowHeight = Gdx.graphics.getHeight();
 
+            float textureWidth = windowWidth / 2.5f;
+            float textureHeight = windowHeight / 2.5f;
+
+            //batch.draw(texture, 0, 0, windowWidth, windowHeight);
+
             batch.draw(texture,
-                        (windowWidth - (windowWidth / 4)) - (windowWidth / 4),
-                        (windowHeight / 2) - (windowHeight / 4),
-                        windowWidth / 2.5f,
-                        windowHeight / 2);
+                        (windowWidth - (windowWidth / 4)) - (textureWidth / 2),
+                        (windowHeight / 2) - (textureHeight / 2),
+                        textureWidth,
+                        textureHeight);
         }
+    }
+
+    @Override
+    public void dispose() {
+        character.dispose();
     }
 
     //==================Index changing===================
