@@ -237,8 +237,12 @@ public class MainMenu extends ScreenAdapter {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
 
+        game.batch.begin();
+        //characterDisplay.draw(game.batch, delta);
+        game.batch.end();
+
+        stage.act(delta);
         stage.draw();
     }
 
