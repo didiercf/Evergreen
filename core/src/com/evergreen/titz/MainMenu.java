@@ -140,6 +140,7 @@ public class MainMenu extends ScreenAdapter {
         //General left table settings
         leftTable.left();
         leftTable.pad(0, Gdx.graphics.getWidth() / 4 - (leftTable.getMinWidth() / 2),  0, 0);
+        leftTable.setDebug(true);
 
         characterDisplay.chooseDisplay(SpritesheetValues.FRONT);
 
@@ -238,10 +239,6 @@ public class MainMenu extends ScreenAdapter {
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        game.batch.begin();
-        //characterDisplay.draw(game.batch, delta);
-        game.batch.end();
-
         stage.act(delta);
         stage.draw();
     }
@@ -249,7 +246,7 @@ public class MainMenu extends ScreenAdapter {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-        //stage.getBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
+        game.batch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
     }
 
     @Override
